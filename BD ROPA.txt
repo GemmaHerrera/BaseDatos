@@ -1,0 +1,44 @@
+DROP TABLE Usuarios
+DROP TABLE Prendas
+DROP TABLE Compras
+DROP TABLE Temporadas
+DROP TABLE Categorias
+
+CREATE TABLE Usuarios (
+                 IDUsuario INT(50)  PRIMARY KEY, 
+                 Password nvarchar(200) NOT NULL,
+                 Nombre nvarchar (50),
+                 Email nvarchar (500),
+                 Tipo nvarchar (100),
+                 Administrador BIT NOT NULL DEFAULT 0,
+)
+  CREATE TABLE Prendas (
+                IDPrenda bigint NOT NULL IDENTITY (1,1) PRIMARY KEY,
+                FechaCreacion datetime NOT NULL DEFAULT getdate(),
+                Color nvarchar(100) NOT NULL,
+                Tipo nvarchar (200) NOT NULL,
+                Precio money (1000) NOT NULL UNIQUE,
+                IDCateg bigint NOT NULL REFERENCES Categorias,
+                Talla nvarchar (500) NOT NULL,
+                IDTemp bigint NOT NULL REFERENCES Temp,
+) 
+   CREATE TABLE Temporadas(
+                      IDTemp bigint NOT NULL IDENTITY (1,1) PRIMARY KER,
+                      FechaCreacion datetime NOT NULL DEFAULT GETDATE(),
+                      Temporada nvarchar(100) NUT NULL,
+)    
+   CREATE TABLE Categorias(
+                IDCateg bigint NOT NULL IDENTITY (1,1) PRIMARY KEY,
+                FechaCreacion datatime NOT NULL DEFAULT GETDATE ()
+                Categoria nvarchar(100) NOT NULL,
+) 
+    CREATE TABLE Compras(
+              IDCompra bigint NOT NULL IDENTITY (1,1) PRIMARY KEY,
+              IDUsuario bigint NOT NULL REFERENCES Usuario,
+              IDPrenda bigint NOT NULL REFERENCES Prenda,
+              Precio money NOT NULL,
+              Cantidad int NOT NULL, 
+)
+              
+              
+            
